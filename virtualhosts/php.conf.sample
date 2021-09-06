@@ -1,0 +1,18 @@
+### PHP
+<VirtualHost *:80>
+    DocumentRoot /var/www/docker/xxxxxx
+    DirectoryIndex index.php
+    ServerName xxxxxx.localhost
+
+    <FilesMatch \.php$>
+        SetHandler "proxy:fcgi://php:9000"
+    </FilesMatch>
+
+    <Directory /var/www/docker/xxxxxx>
+        Require all granted
+        AllowOverride all
+    </Directory>
+
+    CustomLog /usr/local/apache2/logs/xxxxxx.log combined
+    ErrorLog /usr/local/apache2/logs/xxxxxx-error.log
+</VirtualHost>
