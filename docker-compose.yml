@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+    db:
+        build:
+            context: docker/mariadb
+            args:
+                UID: ${USERID}
+        volumes:
+            - "${APP_PATH}data/db:/var/lib/mysql"
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+        ports:
+            - "3306:3306"
+    php:
+        build:
+            context: docker/php8-fpm
+            args:
+                TIMEZONE: ${TIMEZONE}
+                http_proxy: ${PROXY}
+                https_proxy: ${PROXY}
+                UID: ${USERID}
+        user: ${USERID}
+        volumes:
+            - ${APP_PATH}:/var/www/docker
+            
+    web:
+        build:
+            context: docker/apache
+            args:
+                UID: ${USERID}
+        ports:
+            - 8000:80
+            - 8443:443
+        volumes:
+            - ${APP_PATH}:/var/www/docker
+            - ./logs/apache2/:/usr/local/apache2/logs/
+            - ./virtualhosts/:/usr/local/apache2/conf/sites/

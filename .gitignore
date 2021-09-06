@@ -1,0 +1,6 @@
+/projets/
+!/projets/.gitignore
+/logs/
+/virtualhosts/
+!/virtualhosts/*.sample
+/.docker-sync/
