@@ -15,7 +15,7 @@
 
 1. Dupliquer le projet :
     ```bash
-    git clone https://gitlab.univ-lr.fr/ntrugeon/docker-symfony-wp-2020.git devPhpLP
+    git clone https://gitlab.univ-lr.fr/ntrugeon/docker-symfony-wp-2021.git devPhpLP
     # on se place dans le bon dossier
     cd devPhpLP
     ```
